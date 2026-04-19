@@ -1,0 +1,1 @@
+Compound interest is interest calculated on the initial principal and the accumulated interest. It is often called 'interest on interest.' The frequency of compounding affects the final amount. It allows savings to grow exponentially over long periods. The 'Rule of 72' estimates doubling time.

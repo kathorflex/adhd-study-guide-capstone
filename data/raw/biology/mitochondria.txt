@@ -1,0 +1,109 @@
+Mitochondria and health
+Uncovering the many roles that mitochondria play in health and disease
+Your cells’ mitochondria produce almost all the energy your body needs to survive. They also play a role in many other vital cellular functions. This Research in Context feature looks at how insights about these cellular powerhouses might lead to new ways of preventing and treating disease.
+
+Image
+ Senior woman exercising with resistance bands.
+wavebreakmedia / Shutterstock
+Mitochondria:  it’s a big word for tiny structures found in almost every human cell. But, as researchers are learning, these capsule-shaped structures likely have an outsized importance in health and disease.
+
+Mitochondria are organelles—structures within cells that perform specific functions. Scientists often call mitochondria the powerhouses of the cell, because they produce about 90% of the energy that cells need to function. This energy is packed into a chemical called ATP, like electricity stored in a battery until it’s needed.
+
+The more energy cells need, the more mitochondria they have. Cells that need a lot of energy, like muscle cells, neurons, or liver cells, may have hundreds or thousands of these little power generators.
+
+Mitochondria have a host of traits that are unique among the organelles. Mitochondria are the only organelle to have their own genome, with a set of 37 genes. They’re only inherited from mothers, through the egg cell. They can be shared between cells in times of crisis—or stolen by bad actors, such as cancer cells. They produce signaling molecules that can travel through the bloodstream to control functions throughout the body. They can also respond in times of stress by splitting or changing shape.
+
+Mitochondria also provide more to our cells than just energy. They can influence how neurons work and can even start a process to remove damaged cells from the body, called apoptosis. Because mitochondria play a role in so many of the body’s processes, researchers now think that they may contribute to the development of many diseases and disorders. This makes mitochondria a tempting target for new treatments and prevention efforts.
+
+Powering muscle
+Image
+Mitochondria from rat heart muscle cell.
+Mitochondria (brown) from the heart muscle cell of a rat. Mitochondria have an inner membrane that folds in many places (and that appears here as striations). This folding vastly increases the surface area for energy production.
+National Center for Microscopy and Imaging Research
+Researchers have learned a lot about mitochondria from studying rare inherited conditions called mitochondrial disorders. These are sometimes caused by a mutation in the mitochondria’s tiny genome. But mutations within the cell’s main genome, in genes for proteins that interact with mitochondria, can also drive some of these conditions.
+
+Mitochondrial disorders almost always cause progressive damage to the muscles and, often, the nervous system.
+
+“These are among the body’s most energy-hungry cells,” says Dr. Brian Glancy, an NIH researcher who studies mitochondria in muscle. “The brain is a very small percentage of our whole body, but it takes up a huge percentage of the overall energy demand. And if we start moving around, start exercising, then our muscles can take up to 90% of our energy demand,” he explains.
+
+When mitochondria can’t supply this energy in inherited mitochondrial disorders, problems can range from muscle fatigue and weakness to vision and hearing loss and even paralysis and death.
+
+But mitochondrial damage isn’t limited to inherited disorders. Researchers now know that mitochondria may malfunction in conditions as diverse as diabetes, heart and liver disease, and dementia.
+
+Mitochondrial function also generally tends to decrease as we age. “But is that because of aging, or because we stopped being as active as we get older? That’s often hard to separate out,” Glancy says.
+
+Similarly, he adds, while mitochondria malfunction in conditions like diabetes, it’s not clear if that damage is a cause or an effect. Regardless, boosting mitochondrial function has appeal as a potential treatment for many chronic as well as inherited diseases.
+
+Altering where mitochondria are physically located within cells may be one way to do this. Glancy’s lab is trying to understand—and potentially change—the location of mitochondria in cells. In many diseases and disorders, mitochondria migrate away from where they should be to areas of the cell where they’re less effective at producing energy.
+
+Regardless of why this happens, he explains, “mitochondria don’t function by themselves. So where they are in the cell determines how well they interact with other parts of that cell.”
+
+In a recent study in fruit flies, he and his team successfully changed the activity of certain genes to reposition organelles within muscle cells. They’re now expanding on that work to try to affect mitochondria alone. Then they could test to see if physically moving mitochondria could help the cells work better.
+
+Energy for the brain
+Image
+Illustration of distressed neurons.
+Because neurons use a great deal of energy, researchers are exploring whether problems with their mitochondria might contribute to neurological conditions like Alzheimer’s and Parkinson’s disease. 
+CI Photos / Shutterstock
+Neurons in the brain, spinal cord, and peripheral nervous system also use lots of energy. Researchers are exploring whether their mitochondria might contribute to common neurological conditions and be a good target for treatment.
+
+Clinical trials are testing whether boosting energy production by mitochondria in the brain can help relieve symptoms of Alzheimer’s disease. Mitochondria also seem to play a pivotal role in the development of Parkinson’s disease in some people.
+
+In Parkinson’s disease, brain neurons that produce the chemical dopamine die off, particularly in part of the brain called the substantia nigra. This leads to the tremors and other movement problems of the condition, as well as cognition and mood difficulties.
+
+Treatment to boost dopamine levels in the brain can help many people with Parkinson’s disease manage their symptoms, at least for a while. “But we don’t have any therapies yet that can change the course of the disease,” explains Dr. Laurie Sanders, a movement-disorders researcher at Duke University.
+
+Studies testing new drugs in the hope of slowing, stopping, or even reversing the death of neurons in Parkinson’s disease have had disappointing results. Researchers now understand that Parkinson’s disease can have many different causes that can lead to neuron damage, and these likely need different treatments, Sanders explains.
+
+One of these causes appears to be mitochondrial dysfunction. In a recent study, Sanders and her team developed a test called Mito DNADX to detect mitochondrial DNA (mtDNA) damage. Their test found elevated mtDNA damage in cells taken from the blood of people with Parkinson's disease compared with people without the condition.
+
+Hopefully, such tests could eventually be used to pick out people most likely to benefit from new drugs now being tested to prevent mitochondrial DNA damage, Sanders says.
+
+Her team is developing a clinical trial to use their test and other markers of mitochondrial damage to assign people to experimental Parkinson’s treatments in a more personalized manner than in the past. “We want to match the right patients to the right drugs,” she says.
+
+Other researchers are looking at how mitochondria may influence mental health conditions and how people respond to life’s stressors. “We know there’s a stress-disease cascade,” says Dr. Martin Picard, who studies mitochondria and the mind at Columbia University. “Exposure to stress can ‘get under your skin’” and lead to a host of chronic problems, both physical and mental, he explains.
+
+His team is testing whether mitochondria contribute to this phenomenon. “Our working hypothesis is that the stress-disease cascade is actually a stress-energy-disease cascade. If a stressor doesn’t overwhelm your energetic capacity and the health of your mitochondria, then you’ll be fine,” he explains. But if stress overwhelms the ability of the system to produce energy, “we think that can affect mental health and physical health.”
+
+To test this hypothesis, his team has built a database called MiSBIE (Mitochondrial Stress, Brain Imaging, and Epigenetics). They’ve recruited volunteers with several known inherited mitochondrial disorders, as well as healthy volunteers.
+
+The researchers have collected extensive data from all participants about their physical functioning and reactions to stress. Their first step has been to look at whether the molecular responses to stress differ between people with damaged mitochondria and healthy study participants.
+
+Picard’s team is now also using the database to look at whether mitochondria play a role in conditions as diverse as depression, anxiety, and aging.
+
+Viral damage
+Image
+Exhausted woman lying on a sofa.
+Hero Images on Offset / Shutterstock
+Infections may also affect how mitochondria function. Many researchers now think that mitochondrial damage from viruses holds clues to some medical conditions that have long vexed scientists.
+
+One such condition, called myalgic encephalomyelitis/chronic fatigue syndrome (ME/CFS), has been a medical mystery for decades. It’s called a post-viral syndrome—a condition that develops and persists after the body has seemingly eliminated an infection. ME/CFS is a complex medical problem that likely has different causes in different people, explains Dr. Paul Hwang, a mitochondrial researcher at NIH.
+
+People with ME/CFS often experience debilitating exhaustion, exercise intolerance, cognitive problems, and a worsening of symptoms after even mild exertion (known as post-exertional malaise). Because the condition’s main symptom is chronic fatigue (a lack of energy), researchers have wondered if mitochondrial dysfunction may help drive the condition in some people.
+
+In 2023, an NIH research team including Hwang linked a protein called WASF3 to ME/CFS in one woman. WASF3 is boosted in cells by stress signals from a signaling pathway called the ER stress response pathway. This overproduction disrupts mitochondrial energy production.
+
+When Hwang and his colleagues compared muscle tissue samples taken from 14 additional people with ME/CFS to samples from 10 healthy volunteers, they found substantially higher levels of WASF3 in most of the people with ME/CFS.
+
+In experiments using cells, blocking WASF3 allowed mitochondria to produce energy at normal levels. The researchers are now planning a clinical trial using an FDA-approved drug repurposed to tamp down ER stress.
+
+“We’re hoping that if we can block WASF3 overproduction, then we have a chance of improving mitochondrial functioning, and hopefully improve symptoms,” Hwang explains.
+
+This tactic may help with other post-viral syndromes, Hwang added, including Long COVID. Millions of people in the U.S. currently live with Long COVID, defined as symptoms lasting at least 3 months after an initial infection with SARS-CoV-2, the virus that causes COVID-19. Many of its symptoms—including fatigue, post-exertional malaise, and “brain fog”—are similar to those of ME/CFS.
+
+“We have some evidence that WASF3 may be increased in some Long COVID patients as well,” Hwang says. “So, if we see positive results from our trial in people with ME/CFS, we’d naturally consider trying this in Long COVID.”
+
+SARS-CoV-2 may affect the mitochondria in other ways.  A recent NIH-funded study found that the virus can block mitochondrial energy production during infection. This interference shifts cells into a state where they produce more of the substances the virus needs to copy itself. In some people, the mitochondria in organs such as the heart, kidney, liver, and lymph nodes never recovered, even though the body had cleared the virus.
+
+Finding ways to block this mitochondrial damage during infection may be a way to reduce the severity of disease as well as prevent Long COVID from developing.
+
+For healthy mitochondria
+While researchers continue to learn how mitochondria affect health, there are simple ways to keep these cellular powerhouses healthy. “Exercise is a big one,” Glancy says. “And it doesn’t have to be ‘exercise’ per se. It could be working in your garden. It could be walking around your neighborhood. Just move your body.”
+
+“Exercise is also good for your brain,” Sanders explains. “It’s going to help your brain mitochondria, too.” Prioritizing good sleep is vital for these organelles, too, she adds. “Sleep allows our brains to purge some of its garbage, and that helps our mitochondria.”
+
+Diet can boost our mitochondrial health as well, Picard says. “Not eating too much and avoiding added sugar is helpful.” When the body feels hungry, that’s a trigger for cells to perform quality control on their mitochondria and clear out ones that are damaged or near the end of their life, he explains. “That only happens when you’re hungry. It doesn’t happen when you’re overfed.”
+
+“Basically,” Sanders concludes, “all the advice that we get on healthy living is also going to help our mitochondria.”
+
+—by Sharon Reynolds

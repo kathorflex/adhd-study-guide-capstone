@@ -1,0 +1,74 @@
+{
+  "summary": {
+    "total_examples": 4,
+    "successful_evaluations": 3,
+    "avg_readability_boost": 16.5,
+    "avg_output_grade": 4.6,
+    "adhd_compliance_rate": "3/3 (100.0%)",
+    "provider": "gemini"
+  },
+  "detailed_results": [
+    {
+      "id": "bio_001",
+      "domain": "biology",
+      "error": "503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
+    },
+    {
+      "id": "hist_001",
+      "domain": "history",
+      "generated_guide": "🧠 **Quick Guide: The Bas**tille **Storm!**\n\n📆 **Fact 1: When it Hap**pened\nOn **July** 14, **1789",
+      "evaluation": {
+        "Readability Boost": "+43.9 pts",
+        "Source Grade": 10.1,
+        "Output Grade": 1.5,
+        "Formatting Status": "✅ ADHD Compliant"
+      },
+      "ground_truth_summary": "On 14 July 1789 Parisians attacked the Bastille, a large prison that represented the king’s power. They were angry about a lack of bread, political ideas, and rumors that the king kept weapons there. Around six hundred people entered, released the few prisoners, and took the gunpowder stored inside. The fall of the Bastille became a famous moment that showed the power of ordinary citizens and sparked the French Revolution.",
+      "ground_truth_facts": [
+        "The Bastille was stormed on 14 July 1789.",
+        "The attack was driven by a bread shortage, political agitation, and rumors of royal weapon stockpiles.",
+        "About 600 people entered the fortress and freed the few prisoners inside.",
+        "The crowd seized the gunpowder stored in the Bastille.",
+        "The event became a symbol of the French Revolution and the end of absolute monarchy."
+      ]
+    },
+    {
+      "id": "law_001",
+      "domain": "law",
+      "generated_guide": "🧠 **Con**tract **Ba**sics: Your **ADHD**-Friendly **Gui**de! ⚡\n\n**Let**'s **learn** about **how** a",
+      "evaluation": {
+        "Readability Boost": "+9.1 pts",
+        "Source Grade": 9.6,
+        "Output Grade": 5.2,
+        "Formatting Status": "✅ ADHD Compliant"
+      },
+      "ground_truth_summary": "A contract is created when one side makes an offer and the other side says “yes.” The offer must be clearly communicated, show that the person wants to be bound, and list what the agreement is about. The acceptance must be a clear “yes” and must be sent in the way the offeror asked for, or in a normal way if none is mentioned. By the “mailbox rule,” a mailed acceptance works as soon as it is posted. If the other side changes the terms, that is a counter‑offer and the first offer ends.",
+      "ground_truth_facts": [
+        "A contract requires an offer and an acceptance.",
+        "An offer must be communicated, show intent to be bound, and list essential terms.",
+        "Acceptance must be unconditional and communicated in the manner the offeror requires, or reasonably.",
+        "Under the mailbox rule, acceptance is effective when it is mailed, not when received.",
+        "A counter‑offer ends the original offer and creates a new offer."
+      ]
+    },
+    {
+      "id": "math_001",
+      "domain": "math",
+      "generated_guide": "🧠 **Py**tha**go**rean The**o**rem Study Guide! ⚡\n\n**What is it?**\n*   ✅ It's for **right**-an**gled",
+      "evaluation": {
+        "Readability Boost": "+-3.4 pts",
+        "Source Grade": 11.3,
+        "Output Grade": 7.0,
+        "Formatting Status": "✅ ADHD Compliant"
+      },
+      "ground_truth_summary": "The Pythagorean theorem tells us how the sides of a right‑angled triangle are related. If the two short sides are a and b, and the longest side (the hypotenuse) is c, then a² plus b² equals c². This works for every right triangle, no matter how big. The rule can be shown with a picture (Euclid’s proof) or with simple algebra. We use it whenever we need to find the straight‑line distance on a flat surface.",
+      "ground_truth_facts": [
+        "In a right‑angled triangle a² + b² = c².",
+        "c is the hypotenuse; a and b are the legs.",
+        "The theorem works for any size of right triangle.",
+        "It can be proved geometrically (Euclid) or algebraically.",
+        "It underlies distance calculations in 2‑D (and extends to 3‑D)."
+      ]
+    }
+  ]
+}
