@@ -1,0 +1,21 @@
+# Web Interface
+streamlit
+
+# AI Models & Providers
+boto3
+google-generativeai
+groq
+ollama
+
+# Vector Database & RAG
+chromadb
+pysqlite3-binary
+
+# Metrics & NLP
+textstat
+numpy
+
+# Environment & Utilities
+python-dotenv
+requests
+pandas
