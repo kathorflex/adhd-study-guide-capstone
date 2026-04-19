@@ -21,44 +21,67 @@ The pipeline was tested across 30 academic subjects, from Quantum Physics to Con
 
 ---
 
-## 🚀 Quick Start (Local Setup)
+## 🚀 Quick Start (One-Command Setup)
 
-### 1. Environment Setup
-Clone the repo and install dependencies:
+### For Teachers/Evaluators (Fastest)
 ```bash
-git clone https://github.com/your-username/adhd-study-buddy.git
-cd adhd-study-buddy
+# One command setup and demo
+./setup.sh && python run_demo.py
+```
+
+### Manual Setup
+```bash
+# 1. Install dependencies
 pip install -r requirements.txt
-```
 
-### 2. Configure Credentials
-Create a `.env` file in the root directory:
-```text
-AWS_ACCESS_KEY_ID=your_key
-AWS_SECRET_ACCESS_KEY=your_secret
-GEMINI_API_KEY=your_key
-```
+# 2. Configure API keys (edit .env file)
+cp .env.example .env  # Then add your keys
 
-### 3. Ingest the Knowledge Base
-Populate your local Vector DB from the manifest:
-```bash
+# 3. Generate golden dataset
 python scripts/generate_raw_files.py
-python scripts/create_golden_dataset.py
+python data/create_golden_dataset.py
+
+# 4. Launch the app
+streamlit run src/app.py
 ```
 
-### 4. Launch the App
+### Run Evaluation Suite
 ```bash
-streamlit run app.py
+# Run all tests
+python -m pytest tests/ -v
+
+# Compare baseline vs optimized prompts
+python evaluations/baseline_comparison.py --samples 5
+
+# Full evaluation on golden dataset
+python evaluations/run_evaluation.py --provider gemini
 ```
 
 ---
 
 ## 📂 Project Structure
-* `app.py`: Streamlit UI & Orchestration.
-* `manifest.csv`: The 30-row "Gold Standard" dataset.
-* `src/`: Core logic for the 3-stage LLM prompts.
-* `data/raw/`: Original textbook excerpts used for testing.
-* `evaluations/`: The automated `eval_harness` and performance reports.
+```
+adhd-study-guide-capstone/
+├── src/
+│   └── app.py              # Streamlit UI & ChromaDB integration
+├── data/
+│   ├── manifest.csv         # 30-domain golden standard
+│   ├── golden_dataset.jsonl # Evaluation dataset
+│   └── raw/                 # Source textbook excerpts
+├── evaluations/
+│   ├── eval_harness.py      # Metrics engine
+│   ├── run_evaluation.py    # Full evaluation script
+│   └── baseline_comparison.py  # Before/after analysis
+├── tests/
+│   ├── test_pipeline.py     # Core functionality tests
+│   └── test_prompts.py      # Prompt engineering validation
+├── scripts/
+│   ├── generate_raw_files.py    # Data setup
+│   └── create_golden_dataset.py # Dataset builder
+├── PROMPTS.md               # 📖 Prompt engineering techniques
+├── setup.sh                 # One-command setup
+└── run_demo.py              # Teacher demo script
+```
 
 ---
 
