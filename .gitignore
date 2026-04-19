@@ -11,6 +11,13 @@ __pycache__/
 .venv/
 venv/
 ENV/
+env/
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.tox/
+*.log
 
 # Chroma DB
 chroma_data/
@@ -30,3 +37,10 @@ mlx_data/
 # OS
 .DS_Store
 Thumbs.db
+
+# Evaluation outputs
+evaluations/comparison_results.json
+evaluations/final_results.json
+
+# Jupyter
+*.ipynb_checkpoints/

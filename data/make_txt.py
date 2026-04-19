@@ -1,4 +1,3 @@
-import os
 from pathlib import Path
 
 # Data mapping based on your manifest structure
@@ -14,19 +13,21 @@ data_to_generate = {
     "raw/medicine/immune_system.txt": "The immune system is a network of biological processes that protects an organism from diseases. It distinguishes 'self' from 'non-self' pathogens. Innate immunity is the first line of defense, while adaptive immunity creates a 'memory' of specific threats using B and T cells.",
     "raw/government/separation_powers.txt": "Separation of powers divides government into Legislative, Executive, and Judicial branches to prevent any one branch from becoming too powerful. This 'Checks and Balances' structure was central to the U.S. Constitution and inspired by Enlightenment thinkers.",
     "raw/engineering/simple_machines.txt": "Simple machines change the direction or magnitude of a force. The six classical machines are the lever, wheel and axle, pulley, inclined plane, wedge, and screw. Mechanical advantage is the ratio of output force to input force. They follow the law of conservation of energy.",
-    "raw/ethics/utilitarianism.txt": "Utilitarianism is a theory of morality that advocates actions that foster happiness, often summarized as 'the greatest good for the greatest number.' It was developed by Jeremy Bentham and John Stuart Mill and is a form of consequentialism."
+    "raw/ethics/utilitarianism.txt": "Utilitarianism is a theory of morality that advocates actions that foster happiness, often summarized as 'the greatest good for the greatest number.' It was developed by Jeremy Bentham and John Stuart Mill and is a form of consequentialism.",
 }
+
 
 def create_files():
     for filepath, content in data_to_generate.items():
         # Ensure directory exists
         path = Path(filepath)
         path.parent.mkdir(parents=True, exist_ok=True)
-        
+
         # Write the text file
         with open(path, "w", encoding="utf-8") as f:
             f.write(content)
             print(f"✅ Created: {filepath}")
+
 
 if __name__ == "__main__":
     create_files()

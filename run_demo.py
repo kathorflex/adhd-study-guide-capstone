@@ -7,6 +7,7 @@ Runs a mini-evaluation and shows prompt engineering in action.
 import json
 import pathlib
 import sys
+
 import textstat
 from dotenv import load_dotenv
 
@@ -51,7 +52,7 @@ def demo_basic_vs_optimized():
     print(basic_output)
     print(f"\nReadability: {textstat.flesch_reading_ease(basic_output):.1f}")
     print(f"Grade Level: {textstat.flesch_kincaid_grade(basic_output):.1f}")
-    print(f"ADHD Compliance: ❌ (no emojis, no bolding)")
+    print("ADHD Compliance: ❌ (no emojis, no bolding)")
 
     # Optimized prompt output
     optimized_output = """🧠 **Mito**chondria are tiny **power** plants inside cells
@@ -68,7 +69,7 @@ def demo_basic_vs_optimized():
     print(optimized_output)
     print(f"\nReadability: {textstat.flesch_reading_ease(optimized_output):.1f}")
     print(f"Grade Level: {textstat.flesch_kincaid_grade(optimized_output):.1f}")
-    print(f"ADHD Compliance: ✅ (emojis ✓, bolding ✓, bullets ✓)")
+    print("ADHD Compliance: ✅ (emojis ✓, bolding ✓, bullets ✓)")
 
     # Show improvements
     basic_grade = textstat.flesch_kincaid_grade(basic_output)
@@ -78,9 +79,9 @@ def demo_basic_vs_optimized():
     print("📊 IMPROVEMENTS")
     print("=" * 70)
     print(f"Grade Level Reduction: -{(basic_grade - optimized_grade):.1f} grades")
-    print(f"Visual Anchoring: +3 emojis added")
-    print(f"Bionic Bolding: +6 bold terms added")
-    print(f"Structure: Transformed to scannable bullets")
+    print("Visual Anchoring: +3 emojis added")
+    print("Bionic Bolding: +6 bold terms added")
+    print("Structure: Transformed to scannable bullets")
 
 
 def run_mini_evaluation():
@@ -97,7 +98,7 @@ def run_mini_evaluation():
     print("Loading test examples...")
 
     examples = []
-    with dataset_path.open('r') as f:
+    with dataset_path.open("r") as f:
         for i, line in enumerate(f):
             if i >= 3:  # Only first 3
                 break
@@ -110,8 +111,8 @@ def run_mini_evaluation():
         print(f"[{i}/3] {example['id']} - {example['domain']}")
 
         # Metrics for source text
-        source_grade = textstat.flesch_kincaid_grade(example['excerpt'])
-        target_grade = textstat.flesch_kincaid_grade(example['summary_b1'])
+        source_grade = textstat.flesch_kincaid_grade(example["excerpt"])
+        target_grade = textstat.flesch_kincaid_grade(example["summary_b1"])
 
         print(f"  Source Grade Level: {source_grade:.1f}")
         print(f"  Target Grade Level: {target_grade:.1f}")
@@ -136,7 +137,7 @@ def show_test_results():
             ["python3", "-m", "pytest", "tests/", "-v", "--tb=short"],
             capture_output=True,
             text=True,
-            timeout=60
+            timeout=60,
         )
 
         print(result.stdout)

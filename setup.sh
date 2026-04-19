@@ -20,29 +20,49 @@ if [ "$(printf '%s\n' "$REQUIRED_VERSION" "$PYTHON_VERSION" | sort -V | head -n1
 fi
 echo "✅ Python $PYTHON_VERSION detected"
 
-# Create virtual environment if needed
-if [ ! -d ".venv" ]; then
+# Check if uv is available (preferred method)
+if command -v uv &> /dev/null; then
     echo ""
-    echo "2️⃣ Creating virtual environment..."
-    python3 -m venv .venv
-    echo "✅ Virtual environment created"
+    echo "2️⃣ Using uv package manager..."
+
+    # Create/sync venv with uv
+    if [ ! -d ".venv" ]; then
+        uv venv
+        echo "✅ Virtual environment created with uv"
+    else
+        echo "✅ Virtual environment already exists"
+    fi
+
+    echo ""
+    echo "3️⃣ Installing dependencies with uv..."
+    uv pip install -r requirements.txt > /dev/null 2>&1
+    echo "✅ Dependencies installed with uv"
 else
+    # Fallback to standard pip
     echo ""
-    echo "2️⃣ Virtual environment already exists"
+    echo "2️⃣ Creating virtual environment (standard method)..."
+    echo "   Note: Install uv for faster package management: https://docs.astral.sh/uv/"
+
+    if [ ! -d ".venv" ]; then
+        python3 -m venv .venv
+        echo "✅ Virtual environment created"
+    else
+        echo "✅ Virtual environment already exists"
+    fi
+
+    # Activate virtual environment
+    echo ""
+    echo "3️⃣ Activating virtual environment..."
+    source .venv/bin/activate
+    echo "✅ Virtual environment activated"
+
+    # Install dependencies
+    echo ""
+    echo "4️⃣ Installing dependencies with pip..."
+    pip install --upgrade pip > /dev/null 2>&1
+    pip install -r requirements.txt > /dev/null 2>&1
+    echo "✅ Dependencies installed"
 fi
-
-# Activate virtual environment
-echo ""
-echo "3️⃣ Activating virtual environment..."
-source .venv/bin/activate
-echo "✅ Virtual environment activated"
-
-# Install dependencies
-echo ""
-echo "4️⃣ Installing dependencies..."
-pip install --upgrade pip > /dev/null 2>&1
-pip install -r requirements.txt > /dev/null 2>&1
-echo "✅ Dependencies installed"
 
 # Check for .env file
 echo ""

@@ -8,6 +8,7 @@ import csv
 import pathlib
 import sys
 
+
 def generate_raw_files():
     """Read manifest and verify/create all raw excerpt files."""
 
@@ -23,11 +24,11 @@ def generate_raw_files():
     created_count = 0
     existing_count = 0
 
-    with manifest_path.open('r', encoding='utf-8') as f:
+    with manifest_path.open("r", encoding="utf-8") as f:
         reader = csv.DictReader(f)
 
         for row in reader:
-            excerpt_path = project_root / "data" / row['excerpt_path']
+            excerpt_path = project_root / "data" / row["excerpt_path"]
 
             # Create parent directories if needed
             excerpt_path.parent.mkdir(parents=True, exist_ok=True)
@@ -38,29 +39,30 @@ def generate_raw_files():
             else:
                 # For this demo, we'll create placeholder files
                 # In a real scenario, these would be actual textbook excerpts
-                placeholder = f"""[Excerpt for {row['domain']}: {row['id']}]
+                placeholder = f"""[Excerpt for {row["domain"]}: {row["id"]}]
 
 This is a placeholder for the actual textbook excerpt.
 In a production system, this would contain the full academic text.
 
-Domain: {row['domain']}
-Source: {row['source']}
+Domain: {row["domain"]}
+Source: {row["source"]}
 
 Facts covered:
-{row['facts'].replace('||', chr(10))}
+{row["facts"].replace("||", chr(10))}
 
 Simplified summary:
-{row['summary_b1']}
+{row["summary_b1"]}
 """
-                excerpt_path.write_text(placeholder, encoding='utf-8')
+                excerpt_path.write_text(placeholder, encoding="utf-8")
                 created_count += 1
                 print(f"✅ Created: {excerpt_path}")
 
-    print(f"\n📊 Summary:")
+    print("\n📊 Summary:")
     print(f"  Existing files: {existing_count}")
     print(f"  Created files: {created_count}")
     print(f"  Total: {existing_count + created_count}")
-    print(f"\n✅ All raw files ready in data/raw/")
+    print("\n✅ All raw files ready in data/raw/")
+
 
 if __name__ == "__main__":
     generate_raw_files()

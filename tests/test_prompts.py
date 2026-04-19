@@ -123,7 +123,7 @@ Now transform this text: [text]"""
         multi_stage = {
             "stage_1": "Extract 5 key facts from the text.",
             "stage_2": "Simplify each fact to B1 reading level.",
-            "stage_3": "Format with emojis and bionic bolding."
+            "stage_3": "Format with emojis and bionic bolding.",
         }
 
         self.assertEqual(len(multi_stage), 3)
@@ -136,13 +136,14 @@ Now transform this text: [text]"""
         Technique 8: Programmatic Validation
         Checks output meets requirements before accepting.
         """
+
         def validate_adhd_guide(guide: str) -> bool:
             """Validation rules for ADHD guide output."""
             checks = {
                 "has_emoji": any(c in guide for c in "🧠⚡✅🏛️📆"),
                 "has_bolding": "**" in guide,
-                "max_5_bullets": guide.count('\n') <= 5,
-                "no_intro": not guide.lower().startswith("here")
+                "max_5_bullets": guide.count("\n") <= 5,
+                "no_intro": not guide.lower().startswith("here"),
             }
             return all(checks.values())
 
@@ -161,18 +162,17 @@ Now transform this text: [text]"""
         low_temp_config = {
             "temperature": 0.3,
             "top_p": 0.9,
-            "purpose": "factual extraction"
+            "purpose": "factual extraction",
         }
 
         # High temperature = more creative (not suitable for facts)
         high_temp_config = {
             "temperature": 0.9,
             "top_p": 0.95,
-            "purpose": "creative writing"
+            "purpose": "creative writing",
         }
 
-        self.assertLess(low_temp_config["temperature"],
-                       high_temp_config["temperature"])
+        self.assertLess(low_temp_config["temperature"], high_temp_config["temperature"])
         self.assertEqual(low_temp_config["purpose"], "factual extraction")
 
     def test_technique_10_chain_of_thought(self):
@@ -231,16 +231,20 @@ Text to transform:
             "visual_requirements": "emoji" in optimized_prompt,
             "example_provided": "Example" in optimized_prompt,
             "negative_instruction": "No introductory" in optimized_prompt,
-            "structured_format": "REQUIREMENTS" in optimized_prompt
+            "structured_format": "REQUIREMENTS" in optimized_prompt,
         }
 
         techniques_used = sum(techniques.values())
 
-        self.assertGreaterEqual(techniques_used, 5,
-                               "Optimized prompt should use 5+ techniques")
-        self.assertGreater(len(optimized_prompt), len(baseline_prompt) * 3,
-                          "Optimized prompt should be significantly more detailed")
+        self.assertGreaterEqual(
+            techniques_used, 5, "Optimized prompt should use 5+ techniques"
+        )
+        self.assertGreater(
+            len(optimized_prompt),
+            len(baseline_prompt) * 3,
+            "Optimized prompt should be significantly more detailed",
+        )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

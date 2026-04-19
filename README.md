@@ -7,6 +7,7 @@ A specialized RAG (Retrieval-Augmented Generation) pipeline designed to transfor
 * **Semantic Caching:** Uses **ChromaDB** to index and retrieve previously generated guides, reducing API latency and cost.
 * **Model Agnostic:** Built to support **AWS Bedrock (Claude 3.5)**, **Google Gemini 1.5 Flash**, and local **Ollama** deployments.
 * **Verified Reliability:** Audited using an automated evaluation harness with **LLM-as-a-Judge** (Gemini Pro) to ensure zero hallucinations.
+* **Modern Tooling:** Uses **uv** for fast dependency management (10-100x faster than pip).
 
 ---
 
@@ -30,18 +31,45 @@ The pipeline was tested across 30 academic subjects, from Quantum Physics to Con
 ```
 
 ### Manual Setup
-```bash
-# 1. Install dependencies
-pip install -r requirements.txt
 
-# 2. Configure API keys (edit .env file)
+**Option A: Using uv (recommended - faster)**
+```bash
+# 1. Install uv if not already installed
+# https://docs.astral.sh/uv/
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# 2. Create venv and install dependencies
+uv venv
+uv pip install -r requirements.txt
+
+# 3. Configure API keys (edit .env file)
 cp .env.example .env  # Then add your keys
 
-# 3. Generate golden dataset
+# 4. Generate golden dataset
 python scripts/generate_raw_files.py
 python data/create_golden_dataset.py
 
-# 4. Launch the app
+# 5. Launch the app
+streamlit run src/app.py
+```
+
+**Option B: Using standard pip**
+```bash
+# 1. Create virtual environment
+python3 -m venv .venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+
+# 2. Install dependencies
+pip install -r requirements.txt
+
+# 3. Configure API keys (edit .env file)
+cp .env.example .env  # Then add your keys
+
+# 4. Generate golden dataset
+python scripts/generate_raw_files.py
+python data/create_golden_dataset.py
+
+# 5. Launch the app
 streamlit run src/app.py
 ```
 

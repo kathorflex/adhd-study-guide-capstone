@@ -1,11 +1,13 @@
+import os
+
 import pandas as pd
 from datasets import load_dataset
 from sklearn.model_selection import train_test_split
-import os
+
 
 def main():
     print("🚀 Downloading 'simple-wiki' dataset from Sentence-Transformers...")
-    
+
     # This dataset is highly reliable and actively maintained
     dataset = load_dataset("sentence-transformers/simple-wiki", split="train[:5000]")
 
@@ -14,16 +16,15 @@ def main():
 
     # The sentence-transformers dataset uses 'text' and 'simplified' as columns
     print("🧹 Cleaning and formatting the data...")
-    clean_df = pd.DataFrame({
-        'complex_text': df['text'],
-        'simple_text': df['simplified']
-    })
+    clean_df = pd.DataFrame(
+        {"complex_text": df["text"], "simple_text": df["simplified"]}
+    )
 
     # Drop any rows where either column is empty
     clean_df = clean_df.dropna()
-    
+
     # Filter out sentences that are too short to ensure we get good data
-    clean_df = clean_df[clean_df['complex_text'].str.len() > 100]
+    clean_df = clean_df[clean_df["complex_text"].str.len() > 100]
 
     # --- THE TRAIN / TEST SPLIT ---
     print("✂️ Splitting data into Training (80%) and Holdout Test (20%)...")
@@ -34,10 +35,11 @@ def main():
     train_df.to_csv("data/train_wiki.csv", index=False)
     test_df.to_csv("data/test_holdout.csv", index=False)
 
-    print(f"✅ Success!")
+    print("✅ Success!")
     print(f"Training rows: {len(train_df)}")
     print(f"Holdout Test rows: {len(test_df)}")
     print("Check the 'data/' folder for your CSV files.")
+
 
 if __name__ == "__main__":
     main()

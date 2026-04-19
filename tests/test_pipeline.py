@@ -4,9 +4,10 @@ Test suite for ADHD Study Guide pipeline.
 Tests the core transformation pipeline and prompt engineering.
 """
 
-import unittest
-import sys
 import pathlib
+import sys
+import unittest
+
 import textstat
 
 # Add parent directory to path
@@ -24,27 +25,36 @@ class TestADHDTransformation(unittest.TestCase):
         source_score = textstat.flesch_reading_ease(source)
         transformed_score = textstat.flesch_reading_ease(transformed)
 
-        self.assertGreater(transformed_score, source_score,
-                          "Transformed text should be more readable")
+        self.assertGreater(
+            transformed_score, source_score, "Transformed text should be more readable"
+        )
 
     def test_grade_level_reduction(self):
         """Test that transformed text reduces grade level."""
         source = "Mitochondria generate ATP via oxidative phosphorylation in the inner mitochondrial membrane."
-        transformed = "Mitochondria make energy for cells. They work like tiny batteries."
+        transformed = (
+            "Mitochondria make energy for cells. They work like tiny batteries."
+        )
 
         source_grade = textstat.flesch_kincaid_grade(source)
         transformed_grade = textstat.flesch_kincaid_grade(transformed)
 
-        self.assertLess(transformed_grade, source_grade,
-                       "Transformed text should have lower grade level")
-        self.assertLess(transformed_grade, 10.0,
-                       "Transformed text should be below grade 10")
+        self.assertLess(
+            transformed_grade,
+            source_grade,
+            "Transformed text should have lower grade level",
+        )
+        self.assertLess(
+            transformed_grade, 10.0, "Transformed text should be below grade 10"
+        )
 
     def test_emoji_presence(self):
         """Test that output includes visual anchors (emojis)."""
         guide = "🧠 **Mitochondria** make energy\n⚡ They are in most cells\n✅ They have their own DNA"
 
-        emoji_count = sum(1 for char in guide if ord(char) > 127 and char in "🧠⚡✅🏛️📆")
+        emoji_count = sum(
+            1 for char in guide if ord(char) > 127 and char in "🧠⚡✅🏛️📆"
+        )
         self.assertGreater(emoji_count, 0, "Guide should contain emojis")
 
     def test_bionic_bold_presence(self):
@@ -62,7 +72,7 @@ class TestADHDTransformation(unittest.TestCase):
 ⚡ They are **powerhouses**
 ✅ Found in most **cells**"""
 
-        lines = [l.strip() for l in guide.split('\n') if l.strip()]
+        lines = [line.strip() for line in guide.split("\n") if line.strip()]
         self.assertGreaterEqual(len(lines), 3, "Should have at least 3 bullet points")
         self.assertLessEqual(len(lines), 5, "Should have at most 5 bullet points")
 
@@ -107,20 +117,24 @@ class TestDataQuality(unittest.TestCase):
 
     def test_golden_dataset_exists(self):
         """Test that golden dataset file exists."""
-        dataset_path = pathlib.Path(__file__).parent.parent / "data" / "golden_dataset.jsonl"
+        dataset_path = (
+            pathlib.Path(__file__).parent.parent / "data" / "golden_dataset.jsonl"
+        )
         self.assertTrue(dataset_path.exists(), "Golden dataset should exist")
 
     def test_golden_dataset_format(self):
         """Test that golden dataset is valid JSONL."""
         import json
 
-        dataset_path = pathlib.Path(__file__).parent.parent / "data" / "golden_dataset.jsonl"
+        dataset_path = (
+            pathlib.Path(__file__).parent.parent / "data" / "golden_dataset.jsonl"
+        )
 
         if not dataset_path.exists():
             self.skipTest("Golden dataset not yet created")
 
-        with dataset_path.open('r') as f:
-            lines = [l.strip() for l in f if l.strip()]
+        with dataset_path.open("r") as f:
+            lines = [line.strip() for line in f if line.strip()]
 
         self.assertGreater(len(lines), 0, "Dataset should not be empty")
 
@@ -137,17 +151,19 @@ class TestDataQuality(unittest.TestCase):
         """Test that dataset covers multiple domains."""
         import json
 
-        dataset_path = pathlib.Path(__file__).parent.parent / "data" / "golden_dataset.jsonl"
+        dataset_path = (
+            pathlib.Path(__file__).parent.parent / "data" / "golden_dataset.jsonl"
+        )
 
         if not dataset_path.exists():
             self.skipTest("Golden dataset not yet created")
 
         domains = set()
-        with dataset_path.open('r') as f:
+        with dataset_path.open("r") as f:
             for line in f:
                 if line.strip():
                     record = json.loads(line)
-                    domains.add(record['domain'])
+                    domains.add(record["domain"])
 
         self.assertGreaterEqual(len(domains), 10, "Should cover at least 10 domains")
 
@@ -163,8 +179,9 @@ class TestEvaluationMetrics(unittest.TestCase):
         easy_score = textstat.flesch_reading_ease(easy_text)
         hard_score = textstat.flesch_reading_ease(hard_text)
 
-        self.assertGreater(easy_score, hard_score,
-                          "Simple text should have higher reading ease")
+        self.assertGreater(
+            easy_score, hard_score, "Simple text should have higher reading ease"
+        )
 
     def test_grade_level_calculation(self):
         """Test grade level metric calculation."""
@@ -188,8 +205,10 @@ class TestEvaluationMetrics(unittest.TestCase):
 
         # Check bolding
         self.assertIn("**", compliant_guide, "Compliant guide should have bolding")
-        self.assertNotIn("**", non_compliant_guide, "Non-compliant guide should lack bolding")
+        self.assertNotIn(
+            "**", non_compliant_guide, "Non-compliant guide should lack bolding"
+        )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

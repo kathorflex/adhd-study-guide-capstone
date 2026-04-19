@@ -12,11 +12,12 @@ Shows measurable improvement in:
 - ADHD compliance (emojis, bolding, structure)
 """
 
-import sys
-import pathlib
 import json
-import textstat
+import pathlib
+import sys
 from typing import Dict, List
+
+import textstat
 from dotenv import load_dotenv
 
 sys.path.insert(0, str(pathlib.Path(__file__).parent.parent))
@@ -66,8 +67,9 @@ Return JSON:
 def generate_with_llm(prompt: str, provider: str = "gemini") -> str:
     """Generate response using specified LLM provider."""
     if provider == "gemini":
-        from google import genai
         import os
+
+        from google import genai
 
         client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 
@@ -77,13 +79,14 @@ def generate_with_llm(prompt: str, provider: str = "gemini") -> str:
             config={
                 "temperature": 0.3,
                 "max_output_tokens": 1024,
-            }
+            },
         )
         return response.text
 
     elif provider == "anthropic":
-        from anthropic import Anthropic
         import os
+
+        from anthropic import Anthropic
 
         client = Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
 
@@ -91,7 +94,7 @@ def generate_with_llm(prompt: str, provider: str = "gemini") -> str:
             model="claude-3-5-sonnet-20241022",
             max_tokens=1024,
             temperature=0.3,
-            messages=[{"role": "user", "content": prompt}]
+            messages=[{"role": "user", "content": prompt}],
         )
         return message.content[0].text
 
@@ -106,7 +109,13 @@ def evaluate_output(text: str) -> Dict:
         "grade_level": round(textstat.flesch_kincaid_grade(text), 1),
         "has_emojis": any(c in text for c in "🧠⚡✅🏛️📆"),
         "has_bolding": "**" in text,
-        "bullet_count": len([l for l in text.split('\n') if l.strip().startswith(('🧠', '⚡', '✅', '-', '*'))]),
+        "bullet_count": len(
+            [
+                line
+                for line in text.split("\n")
+                if line.strip().startswith(("🧠", "⚡", "✅", "-", "*"))
+            ]
+        ),
         "word_count": len(text.split()),
     }
 
@@ -116,14 +125,14 @@ def run_comparison(test_excerpts: List[Dict], provider: str = "gemini"):
 
     results = []
 
-    print(f"\n{'='*70}")
+    print(f"\n{'=' * 70}")
     print("BASELINE VS OPTIMIZED PROMPT ENGINEERING COMPARISON")
-    print(f"{'='*70}\n")
+    print(f"{'=' * 70}\n")
 
     for i, item in enumerate(test_excerpts, 1):
         print(f"[{i}/{len(test_excerpts)}] Testing: {item['id']} ({item['domain']})")
 
-        excerpt = item['excerpt'][:500]  # Limit length for speed
+        excerpt = item["excerpt"][:500]  # Limit length for speed
 
         # Generate with basic prompt
         print("  - Running baseline (basic prompt)...", end=" ")
@@ -138,37 +147,53 @@ def run_comparison(test_excerpts: List[Dict], provider: str = "gemini"):
         print("✓")
 
         # Calculate improvements
-        readability_gain = optimized_metrics['readability_score'] - basic_metrics['readability_score']
-        grade_reduction = basic_metrics['grade_level'] - optimized_metrics['grade_level']
+        readability_gain = (
+            optimized_metrics["readability_score"] - basic_metrics["readability_score"]
+        )
+        grade_reduction = (
+            basic_metrics["grade_level"] - optimized_metrics["grade_level"]
+        )
 
         result = {
-            "id": item['id'],
-            "domain": item['domain'],
+            "id": item["id"],
+            "domain": item["domain"],
             "baseline": {
                 "output": basic_output[:200] + "...",
-                "metrics": basic_metrics
+                "metrics": basic_metrics,
             },
             "optimized": {
                 "output": optimized_output[:200] + "...",
-                "metrics": optimized_metrics
+                "metrics": optimized_metrics,
             },
             "improvements": {
                 "readability_gain": round(readability_gain, 1),
                 "grade_reduction": round(grade_reduction, 1),
-                "emoji_added": optimized_metrics['has_emojis'] and not basic_metrics['has_emojis'],
-                "bolding_added": optimized_metrics['has_bolding'] and not basic_metrics['has_bolding']
-            }
+                "emoji_added": optimized_metrics["has_emojis"]
+                and not basic_metrics["has_emojis"],
+                "bolding_added": optimized_metrics["has_bolding"]
+                and not basic_metrics["has_bolding"],
+            },
         }
 
         results.append(result)
 
-        print(f"  ✅ Readability: +{readability_gain:.1f} | Grade: -{grade_reduction:.1f}")
+        print(
+            f"  ✅ Readability: +{readability_gain:.1f} | Grade: -{grade_reduction:.1f}"
+        )
 
     # Calculate aggregate statistics
-    avg_readability_gain = sum(r['improvements']['readability_gain'] for r in results) / len(results)
-    avg_grade_reduction = sum(r['improvements']['grade_reduction'] for r in results) / len(results)
-    emoji_improvement = sum(r['improvements']['emoji_added'] for r in results) / len(results) * 100
-    bolding_improvement = sum(r['improvements']['bolding_added'] for r in results) / len(results) * 100
+    avg_readability_gain = sum(
+        r["improvements"]["readability_gain"] for r in results
+    ) / len(results)
+    avg_grade_reduction = sum(
+        r["improvements"]["grade_reduction"] for r in results
+    ) / len(results)
+    emoji_improvement = (
+        sum(r["improvements"]["emoji_added"] for r in results) / len(results) * 100
+    )
+    bolding_improvement = (
+        sum(r["improvements"]["bolding_added"] for r in results) / len(results) * 100
+    )
 
     summary = {
         "total_examples": len(results),
@@ -176,17 +201,17 @@ def run_comparison(test_excerpts: List[Dict], provider: str = "gemini"):
         "avg_grade_reduction": round(avg_grade_reduction, 1),
         "emoji_improvement_rate": f"{emoji_improvement:.0f}%",
         "bolding_improvement_rate": f"{bolding_improvement:.0f}%",
-        "provider": provider
+        "provider": provider,
     }
 
-    print(f"\n{'='*70}")
+    print(f"\n{'=' * 70}")
     print("SUMMARY: PROMPT ENGINEERING IMPACT")
-    print(f"{'='*70}")
+    print(f"{'=' * 70}")
     print(f"Avg Readability Gain: +{summary['avg_readability_gain']} points")
     print(f"Avg Grade Level Reduction: -{summary['avg_grade_reduction']} grades")
     print(f"Visual Anchoring Added: {summary['emoji_improvement_rate']} of examples")
     print(f"Bionic Bolding Added: {summary['bolding_improvement_rate']} of examples")
-    print(f"{'='*70}\n")
+    print(f"{'=' * 70}\n")
 
     return {"summary": summary, "detailed_results": results}
 
@@ -196,28 +221,27 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description="Run baseline vs optimized comparison")
     parser.add_argument(
-        '--provider',
-        choices=['gemini', 'anthropic'],
-        default='gemini',
-        help='LLM provider'
+        "--provider",
+        choices=["gemini", "anthropic"],
+        default="gemini",
+        help="LLM provider",
     )
     parser.add_argument(
-        '--samples',
-        type=int,
-        default=5,
-        help='Number of samples to test'
+        "--samples", type=int, default=5, help="Number of samples to test"
     )
     parser.add_argument(
-        '--output',
+        "--output",
         type=pathlib.Path,
-        default=pathlib.Path(__file__).parent / 'comparison_results.json',
-        help='Output file for results'
+        default=pathlib.Path(__file__).parent / "comparison_results.json",
+        help="Output file for results",
     )
 
     args = parser.parse_args()
 
     # Load sample data
-    dataset_path = pathlib.Path(__file__).parent.parent / 'data' / 'golden_dataset.jsonl'
+    dataset_path = (
+        pathlib.Path(__file__).parent.parent / "data" / "golden_dataset.jsonl"
+    )
 
     if not dataset_path.exists():
         print(f"❌ Error: {dataset_path} not found!")
@@ -226,7 +250,7 @@ if __name__ == "__main__":
 
     # Load first N samples
     test_data = []
-    with dataset_path.open('r') as f:
+    with dataset_path.open("r") as f:
         for i, line in enumerate(f):
             if i >= args.samples:
                 break
@@ -239,7 +263,7 @@ if __name__ == "__main__":
     results = run_comparison(test_data, args.provider)
 
     # Save results
-    with args.output.open('w') as f:
+    with args.output.open("w") as f:
         json.dump(results, f, indent=2)
 
     print(f"📄 Detailed results saved to: {args.output}")

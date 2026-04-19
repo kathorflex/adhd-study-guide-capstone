@@ -1,13 +1,12 @@
-import streamlit as st
-import chromadb
-from chromadb.utils import embedding_functions
-import uuid
 import json
 import os
-import re # Added for cleaning JSON backticks
+import re  # Added for cleaning JSON backticks
+import uuid
+
+import chromadb
+import streamlit as st
+from chromadb.utils import embedding_functions
 from dotenv import load_dotenv
-from anthropic import Anthropic
-import boto3
 from google import genai
 
 # Load environment variables
@@ -17,7 +16,7 @@ load_dotenv()
 CHROMA_DATA_PATH = "./chroma_data"
 COLLECTION_NAME = "adhd_study_guides"
 # Force gemini if preferred, otherwise read from env
-LLM_PROVIDER = os.getenv("LLM_PROVIDER", "gemini").lower() 
+LLM_PROVIDER = os.getenv("LLM_PROVIDER", "gemini").lower()
 
 # --- PROVIDER INITIALIZATION ---
 anthropic_client = None
@@ -47,14 +46,15 @@ if LLM_PROVIDER == "gemini":
 client = chromadb.PersistentClient(path=CHROMA_DATA_PATH)
 embedding_func = embedding_functions.DefaultEmbeddingFunction()
 collection = client.get_or_create_collection(
-    name=COLLECTION_NAME, 
-    embedding_function=embedding_func
+    name=COLLECTION_NAME, embedding_function=embedding_func
 )
+
 
 # --- UTILITY: CLEAN JSON ---
 def clean_json_string(text):
     """Removes markdown code blocks if the model accidentally includes them."""
     return re.sub(r"```json\n?|```", "", text).strip()
+
 
 # --- LLM FUNCTION ---
 def call_llm_api(text):
@@ -80,7 +80,7 @@ def call_llm_api(text):
                     "temperature": 0.3,
                     "max_output_tokens": 2048,
                     "response_mime_type": "application/json",
-                }
+                },
             )
             response_text = clean_json_string(response.text)
 
@@ -98,7 +98,7 @@ def call_llm_api(text):
                 return {
                     "summary": "Error: Received invalid JSON from model",
                     "bullets": ["⚠️ Could not parse response"],
-                    "vocabulary": {}
+                    "vocabulary": {},
                 }
 
         # (Your existing Bedrock/Anthropic logic follows...)
@@ -108,8 +108,9 @@ def call_llm_api(text):
         return {
             "summary": f"Technical Error: {str(e)}",
             "bullets": ["⚠️ Could not generate guide"],
-            "vocabulary": {}
+            "vocabulary": {},
         }
+
 
 # --- UI LAYOUT ---
 st.set_page_config(page_title="ADHD Study Buddy", page_icon="🧠")
@@ -119,7 +120,11 @@ if LLM_PROVIDER == "gemini":
 else:
     st.caption(f"Currently using: {LLM_PROVIDER.upper()}")
 
-user_input = st.text_area("Paste your textbook text here:", height=200, placeholder="E.g. A long paragraph about Photosynthesis...")
+user_input = st.text_area(
+    "Paste your textbook text here:",
+    height=200,
+    placeholder="E.g. A long paragraph about Photosynthesis...",
+)
 
 if st.button("Generate Study Guide", use_container_width=True):
     if not user_input.strip():
@@ -129,9 +134,9 @@ if st.button("Generate Study Guide", use_container_width=True):
             # 1. SEARCH CACHE
             results = collection.query(query_texts=[user_input], n_results=1)
 
-            if results['ids'][0] and results['distances'][0][0] < 0.35:
+            if results["ids"][0] and results["distances"][0][0] < 0.35:
                 st.success("🎯 Found a similar topic in your notes!")
-                study_guide = json.loads(results['metadatas'][0][0]['guide_json'])
+                study_guide = json.loads(results["metadatas"][0][0]["guide_json"])
             else:
                 # 2. GENERATE
                 study_guide = call_llm_api(user_input)
@@ -139,21 +144,21 @@ if st.button("Generate Study Guide", use_container_width=True):
                 collection.add(
                     documents=[user_input],
                     metadatas=[{"guide_json": json.dumps(study_guide)}],
-                    ids=[str(uuid.uuid4())]
+                    ids=[str(uuid.uuid4())],
                 )
 
         # 4. DISPLAY
         st.subheader("Your Study Guide")
-        st.info(study_guide['summary'])
-        
+        st.info(study_guide["summary"])
+
         # Columns for ADHD-friendly scannability
         col1, col2 = st.columns([2, 1])
         with col1:
-            for bullet in study_guide['bullets']:
+            for bullet in study_guide["bullets"]:
                 st.write(bullet)
         with col2:
             st.write("**Keywords**")
-            for term, defn in study_guide['vocabulary'].items():
+            for term, defn in study_guide["vocabulary"].items():
                 st.caption(f"**{term}**: {defn}")
 
 # --- SIDEBAR ---

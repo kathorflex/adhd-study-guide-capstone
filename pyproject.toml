@@ -17,3 +17,11 @@ dependencies = [
     "streamlit>=1.56.0",
     "textstat>=0.7.3",
 ]
+
+[tool.ruff]
+exclude = [".venv", "data/make_txt.py"]
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+ignore = ["E501"]
