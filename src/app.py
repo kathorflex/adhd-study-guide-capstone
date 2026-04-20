@@ -60,10 +60,15 @@ def clean_json_string(text):
 def call_llm_api(text):
     prompt = f"""You are an ADHD-friendly study assistant. Analyze the text and create a study guide.
 
+    REQUIREMENTS:
+    - Use **markdown bold** on key concepts in every bullet
+    - Start each bullet with an emoji (🧠, ⚡, ✅)
+    - Keep sentences short and clear (under 15 words)
+
     Return ONLY a valid JSON object with this exact structure (no additional text):
     {{
       "summary": "2-3 brain-friendly sentences",
-      "bullets": ["🧠 Fact 1", "⚡ Fact 2", "✅ Fact 3"],
+      "bullets": ["🧠 **Key** concept here", "⚡ Another **important** point", "✅ Final **key** fact"],
       "vocabulary": {{"Term": "Simple Definition"}}
     }}
 
@@ -90,7 +95,21 @@ def call_llm_api(text):
 
             # Try to parse the JSON
             try:
-                return json.loads(response_text)
+                guide = json.loads(response_text)
+
+                # Validate ADHD requirements
+                has_bolding = any("**" in bullet for bullet in guide.get("bullets", []))
+                has_emojis = any(
+                    any(emoji in bullet for emoji in "🧠⚡✅🏛️📆")
+                    for bullet in guide.get("bullets", [])
+                )
+
+                if not has_bolding:
+                    st.warning("⚠️ Output missing bionic bolding - regenerate for better accessibility")
+                if not has_emojis:
+                    st.warning("⚠️ Output missing emoji anchors - regenerate for better accessibility")
+
+                return guide
             except json.JSONDecodeError as json_err:
                 st.error(f"JSON Parse Error: {str(json_err)}")
                 st.code(response_text)

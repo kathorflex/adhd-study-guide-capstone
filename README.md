@@ -22,68 +22,67 @@ The pipeline was tested across 30 academic subjects, from Quantum Physics to Con
 
 ---
 
-## 🚀 Quick Start (One-Command Setup)
+## 🚀 Quick Start (Recommended Method)
 
-### For Teachers/Evaluators (Fastest)
+### For Teachers/Evaluators (Fastest - 2 commands!)
 ```bash
-# One command setup and demo
-./setup.sh && python run_demo.py
+# 1. Clone and navigate to project
+git clone <your-repo-url>
+cd adhd-study-guide-capstone
+
+# 2. Run demo (uv handles everything automatically)
+uv run run_demo.py
 ```
 
-### Manual Setup
+**What this does:**
+- ✅ Automatically installs uv if needed
+- ✅ Creates virtual environment
+- ✅ Installs all dependencies
+- ✅ Runs comprehensive demo showing prompt engineering impact
+- ✅ Validates with test suite
 
-**Option A: Using uv (recommended - faster)**
+### Manual Setup (Using uv)
+
 ```bash
-# 1. Install uv if not already installed
+# 1. Install uv (if not already installed)
 # https://docs.astral.sh/uv/
 curl -LsSf https://astral.sh/uv/install.sh | sh
 
-# 2. Create venv and install dependencies
-uv venv
-uv pip install -r requirements.txt
+# 2. Sync dependencies from lock file
+uv sync
 
-# 3. Configure API keys (edit .env file)
+# 3. Configure API keys (optional - demo works without them)
 cp .env.example .env  # Then add your keys
 
-# 4. Generate golden dataset
-python scripts/generate_raw_files.py
-python data/create_golden_dataset.py
+# 4. Generate golden dataset (if not already present)
+uv run python scripts/generate_raw_files.py
+uv run python data/create_golden_dataset.py
 
-# 5. Launch the app
-streamlit run src/app.py
+# 5. Launch the Streamlit app (requires API key)
+uv run streamlit run src/app.py
 ```
 
-**Option B: Using standard pip**
-```bash
-# 1. Create virtual environment
-python3 -m venv .venv
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-
-# 2. Install dependencies
-pip install -r requirements.txt
-
-# 3. Configure API keys (edit .env file)
-cp .env.example .env  # Then add your keys
-
-# 4. Generate golden dataset
-python scripts/generate_raw_files.py
-python data/create_golden_dataset.py
-
-# 5. Launch the app
-streamlit run src/app.py
-```
+**Note:** 
+- `uv sync` installs dependencies from `uv.lock` (faster and deterministic)
+- `uv run` automatically manages virtual environments - no need to activate manually!
 
 ### Run Evaluation Suite
 ```bash
-# Run all tests
-python -m pytest tests/ -v
+# Run all tests with pytest (recommended)
+uv run pytest tests/ -v
 
-# Compare baseline vs optimized prompts
-python evaluations/baseline_comparison.py --samples 5
+# Or run individual test files
+uv run python tests/test_pipeline.py
+uv run python tests/test_prompts.py
 
-# Full evaluation on golden dataset
-python evaluations/run_evaluation.py --provider gemini
+# Compare baseline vs optimized prompts (requires API key)
+uv run python evaluations/baseline_comparison.py --samples 5
+
+# Full evaluation on golden dataset (requires API key)
+uv run python evaluations/run_evaluation.py --provider gemini
 ```
+
+**Note:** All tests work without API keys. Evaluation scripts requiring API calls will indicate when keys are needed.
 
 ---
 
