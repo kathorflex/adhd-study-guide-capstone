@@ -27,7 +27,7 @@ The pipeline was tested across 30 academic subjects, from Quantum Physics to Con
 ### For Teachers/Evaluators (Fastest - 2 commands!)
 ```bash
 # 1. Clone and navigate to project
-git clone <your-repo-url>
+git clone https://github.com/kathorflex/adhd-study-guide-capstone.git
 cd adhd-study-guide-capstone
 
 # 2. Run demo (uv handles everything automatically)
